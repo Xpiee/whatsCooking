@@ -20,4 +20,4 @@ Now, let’s jump onto the exploratory data analysis and try to identify importa
 
 There are 20 unique cuisines in the training dataset. These cuisines along with their distribution, in terms of count, is shown in the figure below:
 ![Fig. 1: Bar graph showing distribution of Cuisines vs Count](images/Cuisine_Distribution.png)
-*italicized text*Fig. 1: Bar graph showing distribution of Cuisines vs Count
+*Fig. 1: Bar graph showing distribution of Cuisines vs Count*
