@@ -69,3 +69,34 @@ For training with TFID Vectorizer, I used the default parameters of the vectoriz
                 smooth_idf=True, stop_words=None, strip_accents=None,
                 sublinear_tf=False, token_pattern='(?u)\\b\\w\\w+\\b',
                 tokenizer=None, use_idf=True, vocabulary=None)`
+                
+                
+## Model Training and Hyperparameter Tuning
+
+Now for predicting the target variable, I trained different machine learning models for classification such as Logistic Regression, SVC, SGD Classifier, Neural Networks, Random Forest, Decision Trees, and K-Nearest Neighbors. 
+
+###	K-Nearest Neighbors, Decision Trees, and Random Forest with 10-fold Cross-Validation
+
+At first, I trained my KNNs, Decision Tree, and Random forest with 10-fold cross-validation on the training dataset prepared by Count Vectorizer. 
+KNN is a simple and very easy to train supervised machine learning algorithm. In fact, there is no training at all for KNN since, they directly memorize each of the datapoint. When a new datapoint is added to the dataset for prediction, they simply predict the target label of this datapoint based on its neighbors determined by Euclidean Distance (defined by parameter “n_neighbor”). Usually, the value of “n_neighbors” are chosen to be an odd value so that there are no ties while predicting. 
+For training the KNN model, I used an arbitrary value of parameter “n_neighbors” as 5 and performed a 10-fold cross-validation on the training dataset. After performing the cross-validation, I could get validation accuracy of 69%. I expected KNN model to perform a little better on the validation set as I thought that the related ingredients would belong to the same cuisines.
+Decision Trees are also a simple to implement supervised machine learning algorithm. This algorithm uses a tree-like graph for making simple decision rules for predicting the target variable. Since we had a multi-class classification problem, for training the decision trees, I used the decision tree classifier in combination with the “OnevsRestClassifier” from scikit-learn package. The “OnevsRestClassifier” fits a single classifier per target label.
+
+As expected, the decision tree classifier with ‘one vs rest’ classifier fit the training model very well. After training the model, I got the validation accuracy of 91.7%. However, when I predicted the target labels on the test dataset, the decision trees could give me Kaggle score of 0.60166 (with TFID Vectorizer, refer the main code file named, “EDA, Data Pre-Processing, and Modelling (Best)”). 
+Random Forest classifier also performed well on the training dataset. After the training it on the training dataset with 10-fold cross-validation, the validation accuracy was around 93.18%. However, on the test dataset, the algorithm did not perform as expected (even with the tuned hyperparameters) and I could only get a Kaggle Score of 0.58628.
+
+To further inspect the reason behind such a low accuracy, I checked the dataset and predictions. I observed that some to the cuisines have very similar ingredients e.g., British and Irish cuisines have mostly similar ingredients, while Southern US and Mexican cuisines also shared some ingredients. Since, there were a lot of cuisines with very similar ingredients, it would have confused the KNN, DT and even the Random Forest algorithm; hence, leading to a very low validation accuracy.
+To improve the score, as already mentioned, I used the TFID Vectorizer instead of Count Vectorizer with other machine learning algorithms.
+
+### 1.4.2	Model Training with TFID Vectorizer
+
+With TFID Vectorizer, I trained the following models:
+
+**Logistic Regression**
+
+Logistic Regression is a classification algorithm that transforms its outputs using logistic sigmoid function to return a probability value and hence, the target label is predicted based on the highest probability. For training the logistic regression, firstly, I transformed the data into a sparse matrix using TFID Vectorizer (already discussed). Then, I split the training dataset into train and validation set by using “train_test_split” library from scikit-learn package. After that, I used the Logistic Regression classifier to fit on the training dataset with arbitrary parameters i.e., C = 10. The ‘C’ parameter in Logistic Regression in called Inverse regularization parameter i.e., lower value of ‘C’ would represent high value of Lambda regulator. So, for a start I choose the value to be 10 (default value is 1).
+By training the classifier on my train data set, I got a validation accuracy of ~79.34%. Then I used the same parameters to make the prediction on my test dataset. I got the Kaggle score of ~78.75. This score was way better than DT, KNN and Random Forest in the above section.
+
+For improving this model, I performed a grid search with the following parameters:
+
+
