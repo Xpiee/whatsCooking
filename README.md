@@ -19,4 +19,4 @@ As mentioned earlier, the dataset is provided by Yummly has different recipes in
 Now, let’s jump onto the exploratory data analysis and try to identify important patterns and extract valuable insights from the dataset. These insights would help us design our strategies to pre-process the text given in the column ‘ingredients’. Since, the dataset did not have any missing or null values so, we don’t have to deal with any missing values.
 
 There are 20 unique cuisines in the training dataset. These cuisines along with their distribution, in terms of count, is shown in the figure below:
-![alt text](images/Cuisine_Distribution.png)
+![Fig. 1: Bar graph showing distribution of Cuisines vs Count](images/Cuisine_Distribution.png)
