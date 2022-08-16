@@ -62,10 +62,10 @@ After training a random forest with best grid searched parameters, I could only 
 
 For training with TFID Vectorizer, I used the default parameters of the vectorizer with default value of ‘token_pattern’ and the default value range of parameter ‘ngram_range’ i.e, (1, 1). Default values of the ‘token_pattern’ and ‘tokenizer’ means that my ingredients would be divided on the basis of each word. Also, ‘ngram_range’ of (1, 1) means that only unigrams would be extracted from the ingredients list. This does make sense since we do not need n-grams for this problem statements. For TFID vectorizer, I did not use any stop words as well. Also, very important to mention, I have taken the ‘binary’ parameter as True, this does not mean that the outputs will only have 0/1 values, instead only the tf-term (i.e., term-frequency) in the tf-idf would be binary. The parameters of TFID Vectorizer are mentioned below:
 
-'TfidfVectorizer(analyzer='word', binary=True, decode_error='strict',
+`TfidfVectorizer(analyzer='word', binary=True, decode_error='strict',
                 dtype=<class 'numpy.float64'>, encoding='utf-8',
                 input='content', lowercase=True, max_df=1.0, max_features=None,
                 min_df=1, ngram_range=(1, 1), norm='l2', preprocessor=None,
                 smooth_idf=True, stop_words=None, strip_accents=None,
                 sublinear_tf=False, token_pattern='(?u)\\b\\w\\w+\\b',
-                tokenizer=None, use_idf=True, vocabulary=None)'
+                tokenizer=None, use_idf=True, vocabulary=None)`
